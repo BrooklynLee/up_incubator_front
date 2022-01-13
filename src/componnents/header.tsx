@@ -9,7 +9,10 @@ export const Header: React.FC = () => {
     return (
         <header className="py-4">
             <div className="w-full px-5 xl:px-0 max-w-screen-xl mx-auto flex justify-between items-center">
-                <img src={UPLOGO} className="w-24" alt="UP Incubator" />UP 실험실
+                <Link to="/">
+                    <img src={UPLOGO} className="w-10" alt="UP Incubator" />
+                </Link>
+                UP 실험실
                 <span className="text-xs">
                     <Link to="/">
                         <FontAwesomeIcon icon={faUser} className="text-3xl" />

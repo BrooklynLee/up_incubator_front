@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Features } from "../pages/client/features";
 import { Feature } from "../pages/client/feature";
 import { Search } from "../pages/client/search";
+import { NotFound } from "../pages/404";
 
 const ClientRoutes = [
     <Route key={1} path="/" element={<Features />} />,
@@ -24,6 +25,9 @@ export const LoggedInRouter = () => {
                 <Header />
                 <Routes>
                     {ClientRoutes}
+                    {/* <Route>
+                        <NotFound />
+                    </Route> */}
                 </Routes>
             </BrowserRouter>
         </div>

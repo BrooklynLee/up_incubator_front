@@ -466,17 +466,78 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-sepia:  ;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
+.col-span-7 {
+  grid-column: span 7 / span 7;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
+.col-start-2 {
+  grid-column-start: 2;
+}
+
+.col-start-9 {
+  grid-column-start: 9;
+}
+
+.col-start-6 {
+  grid-column-start: 6;
+}
+
+.col-end-11 {
+  grid-column-end: 11;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
 
-.mb-3 {
-  margin-bottom: 0.75rem;
+.-my-2 {
+  margin-top: -0.5rem;
+  margin-bottom: -0.5rem;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 
 .mb-5 {
@@ -491,20 +552,40 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 2rem;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
 .mt-10 {
   margin-top: 2.5rem;
+}
+
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .flex {
   display: flex;
 }
 
+.inline-flex {
+  display: inline-flex;
+}
+
+.table {
+  display: table;
+}
+
 .grid {
   display: grid;
+}
+
+.h-6 {
+  height: 1.5rem;
 }
 
 .h-screen {
@@ -515,44 +596,64 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 4rem;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
 .w-full {
   width: 100%;
 }
 
-.w-24 {
-  width: 6rem;
+.w-10 {
+  width: 2.5rem;
 }
 
 .w-3\/12 {
   width: 25%;
 }
 
-.w-3\/4 {
-  width: 75%;
+.w-80 {
+  width: 20rem;
 }
 
 .w-16 {
   width: 4rem;
 }
 
-.max-w-screen-xl {
-  max-width: 1280px;
+.min-w-full {
+  min-width: 100%;
 }
 
-.max-w-screen-2xl {
-  max-width: 1536px;
+.max-w-screen-xl {
+  max-width: 1280px;
 }
 
 .max-w-sm {
   max-width: 24rem;
 }
 
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
 
+.grid-cols-10 {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -575,6 +676,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-around;
 }
 
+.gap-4 {
+  gap: 1rem;
+}
+
 .gap-x-5 {
   -webkit-column-gap: 1.25rem;
           column-gap: 1.25rem;
@@ -582,6 +687,37 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-y-10 {
   row-gap: 2.5rem;
+}
+
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+.divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-divide-opacity));
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-md {
@@ -592,17 +728,29 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 9999px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-0 {
   border-width: 0px;
 }
 
-.border-t {
-  border-top-width: 1px;
+.border-l-2 {
+  border-left-width: 2px;
 }
 
-.border-gray-400 {
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-solid {
+  border-style: solid;
+}
+
+.border-gray-200 {
   --tw-border-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-border-opacity));
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -610,22 +758,27 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-gray-800 {
+.bg-gray-50 {
   --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity));
 }
 
 .bg-cover {
   background-size: cover;
 }
 
-.bg-center {
-  background-position: center;
+.p-3 {
+  padding: 0.75rem;
 }
 
-.py-28 {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .py-2 {
@@ -648,22 +801,57 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 2rem;
 }
 
-.py-40 {
-  padding-top: 10rem;
-  padding-bottom: 10rem;
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.pl-8 {
+  padding-left: 2rem;
 }
 
 .pl-48 {
   padding-left: 12rem;
 }
 
+.pl-16 {
+  padding-left: 4rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
+}
+
+.text-left {
+  text-align: left;
+}
+
 .text-center {
   text-align: center;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.align-middle {
+  vertical-align: middle;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-xs {
@@ -691,21 +879,43 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2.5rem;
 }
 
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+.font-medium {
+  font-weight: 500;
 }
 
 .font-semibold {
   font-weight: 600;
 }
 
-.font-medium {
-  font-weight: 500;
-}
-
 .font-light {
   font-weight: 300;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.leading-5 {
+  line-height: 1.25rem;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.text-yellow-500 {
+  --tw-text-opacity: 1;
+  color: rgb(234 179 8 / var(--tw-text-opacity));
+}
+
+.text-gray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-lime-600 {
@@ -713,8 +923,61 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(101 163 13 / var(--tw-text-opacity));
 }
 
-.opacity-50 {
-  opacity: 0.5;
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-green-800 {
+  --tw-text-opacity: 1;
+  color: rgb(22 101 52 / var(--tw-text-opacity));
+}
+
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.text-pink-700 {
+  --tw-text-opacity: 1;
+  color: rgb(190 24 93 / var(--tw-text-opacity));
+}
+
+.text-indigo-600 {
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+
+.text-green-600 {
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74 / var(--tw-text-opacity));
+}
+
+.text-pink-500 {
+  --tw-text-opacity: 1;
+  color: rgb(236 72 153 / var(--tw-text-opacity));
+}
+
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.hover\:bg-gray-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
 .hover\:underline:hover {
@@ -727,9 +990,31 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-@media (min-width: 768px) {
-  .md\:w-3\/12 {
-    width: 25%;
+@media (min-width: 640px) {
+  .sm\:-mx-6 {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
+  .sm\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:-mx-8 {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+
+  .lg\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 

@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-import { SwaggerTest } from "../../componnents/swagger";
-import { useQuery } from 'react-query';
 
 
 // interface IFeatureParams {
