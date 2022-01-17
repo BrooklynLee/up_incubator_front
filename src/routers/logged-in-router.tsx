@@ -9,7 +9,9 @@ import { NotFound } from "../pages/404";
 const ClientRoutes = [
     <Route key={1} path="/" element={<Features />} />,
     <Route key={2} path="/features/:id" element={<Feature />} />,
-    <Route key={3} path="/search" element={<Search />} />
+    <Route key={3} path="/search" element={<Search />} />,
+    <Route key={4} path="/features" element={<Features />} />,
+
     // <Route key={2} path="/confirm" exact>
     //   <ConfirmEmail />
     // </Route>,

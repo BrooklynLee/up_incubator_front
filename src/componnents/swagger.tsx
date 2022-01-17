@@ -3,11 +3,16 @@ import "swagger-ui-react/swagger-ui.css";
 import SwaggerUI from "swagger-ui-react";
 
 
-export const SwaggerTest: React.FC = () => {
+
+interface IProps {
+    url: string;
+}
+
+export const SwaggerTest = ({ url }: { url: string }) => {
     // const { data } = useMe();
     return (
         <div>
-            <SwaggerUI url="https://petstore3.swagger.io/api/v3/openapi.json" />
+            <SwaggerUI url={url} />
         </div>
     );
 };
