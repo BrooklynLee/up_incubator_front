@@ -1,5 +1,5 @@
 import { url } from "inspector";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import { Feature } from "../../componnents/feature";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -9,47 +9,49 @@ interface IFormProps {
     searchTerm: string;
 }
 
+
 export const Features = () => {
 
     // const classes = useStyles();
     const [features, setFeatures] = useState({ results: [] });
     const [tags, setTags] = useState({ results: [] });
-    const [progress, setProgress] = useState(0);
+    // const [progress, setProgress] = useState(0);
     const [isLoading, setLoading] = useState(false)
-    const [values, setValues] = useState();
+    const [keywords, setKeywords] = useState('')
 
 
-    const { handleSubmit, getValues } = useForm<IFormProps>();
-    const history = useNavigate();
-    const onSearchSubmit = () => {
-        const { searchTerm } = getValues();
-        console.log(searchTerm)
-        history({
-            pathname: "/search",
-            search: `?term=${searchTerm}`,
-        });
-    };
+    const fetchData = async () => {
+        setLoading(true);
+        const result = await axios.get("/api/v1/features" + "/?search=" + keywords)
+        const tag_result = await axios.get("/api/v1/tags/")
+        console.log("/api/v1/features" + "/?search=" + keywords)
+        setFeatures(result.data);
+        setTags(tag_result.data);
+        setLoading(false);
+    }
+
+
+    // useForm(1): useForm은 두번 호출해야 한다...;
+    // const onSearchSubmit = () => {
+    //     const { searchTerm } = getValues();
+    //     setKeywords(searchTerm)
+    //     console.log(searchTerm)
+    //     fetchData()
+    // };
+
+    // useForm(2): useForm은 두번 호출해야 한다...;
+    // const { register, handleSubmit, getValues } = useForm<IFormProps>();
+
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        fetchData()
+    }
 
 
     useEffect(() => {
-        const fetchData = async () => {
-
-            // setInterval(() => {
-            //     setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 1));
-            // }, 20);
-            // setLoading(true);
-
-            setLoading(true);
-            const result = await axios.get("/api/v1/features/")
-            const tag_result = await axios.get("/api/v1/tags/")
-            setFeatures(result.data);
-            setTags(tag_result.data);
-            setLoading(false);
-        };
         fetchData();
     }, []);
-
-
 
     return (
         <div className="max-w-screen-xl mx-auto mt-8">
@@ -59,23 +61,27 @@ export const Features = () => {
 
                     {/* Search Component */}
                     <div className="relative">
-                        <form onSubmit={handleSubmit(onSearchSubmit)}>
+                        {/* <form onSubmit={handleSubmit(onSearchSubmit)}> */}
+                        <form onSubmit={handleSubmit}>
                             <div className="absolute top-0 bottom-0 left-0 flex items-center px-5">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                             </div>
-                            <input type="text" placeholder="Search..." className="focus:ring-2 focus:ring-blue-500 focus:outline-none pl-16 pr-4 py-4 rounded-md shadow-md bg-white border-0 w-full outline-none" />
+                            {/* useForm(3): useForm은 두번 호출해야 한다...; */}
+                            {/* <input type="text" placeholder="Search..." className="focus:ring-2 focus:ring-blue-500 focus:outline-none pl-16 pr-4 py-4 rounded-md shadow-md bg-white border-0 w-full outline-none" {...register("searchTerm")} /> */}
+                            <input type="text" placeholder="Search..." className="focus:ring-2 focus:ring-blue-500 focus:outline-none pl-16 pr-4 py-4 rounded-md shadow-md bg-white border-0 w-full outline-none" value={keywords} onChange={e => setKeywords(e.target.value)} />
                         </form>
+
 
                     </div>
 
                     <ul className="rounded-md shadow-md bg-white absolute left-0 right-0 -bottom-18 mt-3 p-3">
                         <li className="text-xs uppercase text-gray-400 border-b border-gray border-solid py-2 px-5 mb-2">
-                            Recommended
+                            추천
                         </li>
                         {features?.results?.map((c: any) => {
-                            if (c.is_recommend == true && c.is_active == true) {
+                            if (c.is_recommend === true && c.is_active === true) {
                                 return (
                                     <Feature
                                         key={c.id}
@@ -94,11 +100,11 @@ export const Features = () => {
                         })}
 
                         <li className="text-xs uppercase text-gray-400 border-b border-gray border-solid py-2 px-5 mb-2">
-                            Others
+                            일반
                         </li>
                         {features?.results?.map((c: any) => {
 
-                            if (c.is_recommend == false && c.is_active == true) {
+                            if (c.is_recommend === false && c.is_active === true) {
                                 return (
                                     <Feature
                                         key={c.id}

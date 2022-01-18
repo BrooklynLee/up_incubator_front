@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router";
 import { SwaggerTest } from "../../componnents/swagger";
@@ -23,7 +23,6 @@ export const Feature = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-
             setLoading(true);
             const result = await axios.get("/api/v1/features/" + id)
             setData(result.data);
@@ -32,6 +31,8 @@ export const Feature = () => {
         };
         fetchData();
     }, []);
+
+
 
 
     return (
@@ -47,6 +48,22 @@ export const Feature = () => {
 
                                     {/* <!-- Feature Info Section --> */}
                                     <div className="bg-white p-3 shadow-sm rounded-sm">
+                                        <div className="flex justify-end space-x-2 font-semibold text-gray-900 leading-8">
+
+                                            <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded">
+                                                즐겨찾기
+                                            </button>
+                                            <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded">
+                                                이 UP를 사용합니다
+                                            </button>
+                                            {/* <span className="tracking-wide"><button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                Button
+                                            </button></span> */}
+                                        </div>
+
+                                    </div>
+                                    {/* <!-- Feature Info Section --> */}
+                                    <div className="bg-white p-3 shadow-sm rounded-sm">
                                         <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                                             <span className="tracking-wide">1. 기본 정보</span>
                                         </div>
@@ -55,7 +72,7 @@ export const Feature = () => {
                                                 <div className="grid grid-cols-6">
                                                     <div className="px-4 py-2 col-span-1 font-semibold">UP 이름
                                                     </div>
-                                                    <div className="px-4 py-2">{data?.name}</div>
+                                                    <div className="px-4 py-2 col-span-5">{data?.name}</div>
                                                 </div>
                                                 <div className="grid grid-cols-6">
                                                     <div className="px-4 py-2 col-span-1 font-semibold">타입</div>
@@ -162,7 +179,7 @@ export const Feature = () => {
                                                             </tr>
                                                         )
                                                     })
-                                                        : "없음"}
+                                                        : null}
                                                     </tbody>
 
                                                 </table>
