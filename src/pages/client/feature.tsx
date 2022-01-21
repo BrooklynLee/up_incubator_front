@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { SwaggerTest } from "../../componnents/swagger";
-
+import { useDispatch } from "react-redux";
+import { toggleFav } from "../../redux/usersSlice";
 
 // interface IFeatureParams {
 //     id: string;
@@ -19,6 +20,7 @@ export const Feature = () => {
     const [type, setType] = useState<any>({});
 
     const { id } = useParams();
+    const dispatch = useDispatch();
     // const [progress, setProgress] = useState(0);
 
     useEffect(() => {
@@ -53,7 +55,7 @@ export const Feature = () => {
                                             <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded">
                                                 즐겨찾기
                                             </button>
-                                            <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded">
+                                            <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded" onClick={() => dispatch(toggleFav(data.id))}>
                                                 이 UP를 사용합니다
                                             </button>
                                             {/* <span className="tracking-wide"><button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

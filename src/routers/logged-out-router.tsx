@@ -8,25 +8,14 @@ import { NotFound } from "../pages/404";
 import { Login } from "../pages/login";
 
 const ClientRoutes = [
-    <Route key={1} path="/" element={<Features />} />,
-    <Route key={2} path="/features/:id" element={<Feature />} />,
-    <Route key={3} path="/search" element={<Search />} />,
-    <Route key={4} path="/features" element={<Features />} />,
-    <Route key={4} path="/login" element={<Login />} />,
-
-    // <Route key={2} path="/confirm" exact>
-    //   <ConfirmEmail />
-    // </Route>,
-    // <Route key={3} path="/edit-profile" exact>
-    //   <EditProfile />
-    // </Route>,
+    <Route key={1} path="/" element={<Login />} />,
+    // <Route key={2} path="/features/:id" element={<Feature />} />,
 ];
 
-export const LoggedInRouter = () => {
+export const LoggedOutRouter = () => {
     return (
         <div>
             <BrowserRouter>
-                <Header />
                 <Routes>
                     {ClientRoutes}
                     {/* <Route>
@@ -37,3 +26,4 @@ export const LoggedInRouter = () => {
         </div>
     );
 }
+
