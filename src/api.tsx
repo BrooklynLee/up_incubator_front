@@ -28,6 +28,7 @@ export default {
     // createAccount: form => callApi("post", "/users/", form),
     login: (form: any) => callApi("post", "/users/login/", form),
     favs: (id: number) => callApi("get", `/users/${id}/favs/`),
+    features: (page: number = 1) => callApi("get", `/features/?page=${page}`),
     toggleFavs: (userId: number, featureId: number, token: any) =>
         callApi("put", `/users/${userId}/favs/`, { pk: featureId }, token)
 }; 

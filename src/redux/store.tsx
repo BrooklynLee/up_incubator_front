@@ -11,6 +11,8 @@ import {
     PURGE,
     REGISTER
 } from "redux-persist";
+import { composeWithDevTools } from 'redux-devtools-extension'; // 리덕스 개발자 도구
+
 
 const persistConfig = {
     key: "root",
@@ -25,6 +27,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
     reducer: persistedReducer,
+    devTools: process.env.NODE_ENV !== 'production', // devTool 의 옵션을 선택합니다.
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             // thunk: {
