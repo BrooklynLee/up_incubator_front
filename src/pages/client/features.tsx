@@ -1,7 +1,7 @@
 import { url } from "inspector";
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
-import { Feature } from "../../componnents/feature";
+import { Feature } from "../../components/feature";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { getFeatures } from "../../redux/featuresSlice";

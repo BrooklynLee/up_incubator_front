@@ -1,18 +1,20 @@
 import React from "react";
-import { Header } from "../componnents/header";
+import { Header } from "../components/header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Features } from "../pages/client/features";
 import { Feature } from "../pages/client/feature";
 import { Search } from "../pages/client/search";
 import { NotFound } from "../pages/404";
 import { Login } from "../pages/login";
+import ExploreContainer from "../pages/client/index";
+import { CsvReader } from "../components/csv-reader";
 
 const ClientRoutes = [
     <Route key={1} path="/" element={<Features />} />,
     <Route key={2} path="/features/:id" element={<Feature />} />,
     <Route key={3} path="/search" element={<Search />} />,
-    <Route key={4} path="/features" element={<Features />} />,
-    <Route key={4} path="/login" element={<Login />} />,
+    <Route key={4} path="/test" element={<CsvReader />} />,
+    <Route key={5} path="/login" element={<Login />} />,
 
     // <Route key={2} path="/confirm" exact>
     //   <ConfirmEmail />

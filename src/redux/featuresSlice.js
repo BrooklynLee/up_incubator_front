@@ -14,7 +14,7 @@ const featuresSlice = createSlice({
         setExploreFeatures(state, action) {
             const { explore } = state;
             const { payload } = action;
-            payload.features.forEach((payloadFeature: any) => {
+            payload.features.forEach(payloadFeature => {
                 const exists = explore.features.find(
                     savedFeature => savedFeature.id === payloadFeature.id
                 );
@@ -34,7 +34,9 @@ export const getFeatures = () => async dispatch => {
     try {
         const {
             data: { results }
+            // data
         } = await api.features();
+        console.log(results);
         dispatch(
             setExploreFeatures({
                 rooms: results,

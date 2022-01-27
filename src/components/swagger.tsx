@@ -2,13 +2,7 @@ import React from "react";
 import "swagger-ui-react/swagger-ui.css";
 import SwaggerUI from "swagger-ui-react";
 
-
-
-interface IProps {
-    url: string;
-}
-
-export const SwaggerTest = ({ url }: { url: string }) => {
+export const SwaggerViewer = ({ url }: { url: string }) => {
     // const { data } = useMe();
     return (
         <div>

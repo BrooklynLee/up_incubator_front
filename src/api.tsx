@@ -8,14 +8,20 @@ const callApi = async (method: any, path: any, data?: any, jwt?: any) => {
     };
     const baseUrl = "/api/v1";
     const fullUrl = `${baseUrl}${path}`;
+    console.log(fullUrl)
+    console.log(method)
+
     if (method === "get") {
         return axios.get(fullUrl, { headers });
     }
     else if (method === "delete") {
         return axios.delete(fullUrl, { headers });
     }
-    else {
+    else if (method === "post") {
         return axios.post(fullUrl, data, { headers });
+    }
+    else {
+        return axios.put(fullUrl, data, { headers });
     }
     // if (method === "get" || method === "delete") {
     //     return axios[method](fullUrl, { headers });

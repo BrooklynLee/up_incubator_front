@@ -3,13 +3,11 @@ import React, { useEffect, useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router";
-import { SwaggerTest } from "../../componnents/swagger";
+import { SwaggerViewer } from "../../components/swagger";
+import { DataInfo } from "../../components/data-info";
+import { CsvReader } from "../../components/csv-reader";
 import { useDispatch } from "react-redux";
-import { toggleFav } from "../../redux/usersSlice";
-
-// interface IFeatureParams {
-//     id: string;
-// }
+import { Fav } from "../../components/fav";
 
 export const Feature = () => {
     // const params = useParams<IFeatureParams>();
@@ -36,7 +34,6 @@ export const Feature = () => {
 
 
 
-
     return (
         <div className="post-view-wrapper bg-gray-100">
             {
@@ -45,25 +42,12 @@ export const Feature = () => {
                         <div className="max-w-screen-xl mx-auto mt-8 ">
 
                             <div className="px-12">
-                                {/* <!-- Right Side --> */}
                                 <div className="w-full mx-2 h-64">
 
-                                    {/* <!-- Feature Info Section --> */}
-                                    <div className="bg-white p-3 shadow-sm rounded-sm">
-                                        <div className="flex justify-end space-x-2 font-semibold text-gray-900 leading-8">
 
-                                            <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded">
-                                                즐겨찾기
-                                            </button>
-                                            <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded" onClick={() => dispatch(toggleFav(data.id))}>
-                                                이 UP를 사용합니다
-                                            </button>
-                                            {/* <span className="tracking-wide"><button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                Button
-                                            </button></span> */}
-                                        </div>
+                                    {/* <!-- Upper Side --> */}
+                                    <Fav key={data.id} id={data.id} />
 
-                                    </div>
                                     {/* <!-- Feature Info Section --> */}
                                     <div className="bg-white p-3 shadow-sm rounded-sm">
                                         <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -139,55 +123,11 @@ export const Feature = () => {
                                     </div>
                                     {/* <!-- End of Feature Info section --> */}
 
-                                    {type.type_name === "Rest API" ? <div><SwaggerTest url={data.file} /> </div> : null}
+                                    {type.type_name === "Rest API" ? <div><SwaggerViewer url={data.file} /> </div> : null}
 
                                     {/* 스키마 설명 */}
-                                    <div className="w-full mb-12 xl:mb-0 px-4 mx-auto mt-8">
-                                        <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                                            <div className="block w-full overflow-x-auto">
-                                                <table className="items-center bg-transparent w-full border-collapse ">
-                                                    <thead>
-                                                        <tr>
-                                                            <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                                컬럼 이름
-                                                            </th>
-                                                            <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                                컬럼 이름(국문)
-                                                            </th>
-                                                            <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                                타입
-                                                            </th>
-                                                            <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                                                설명
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>{data.columns ? data.columns.map((item: any) => {
-                                                        return (
-                                                            <tr>
-                                                                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                                                                    {item.columns_name}
-                                                                </th>
-                                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                                                    {item.columns_name_kr}
-                                                                </td>
-                                                                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                                    {item.columns_type}
-                                                                </td>
-                                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                                    <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                                                                    {item.columns_desc}
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    })
-                                                        : null}
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <DataInfo columns={data.columns} />
+                                    <CsvReader />
 
                                     {/* <!-- Experience and education --> */}
                                     <div className="bg-white p-3 shadow-sm rounded-sm">

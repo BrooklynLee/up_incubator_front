@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Feature } from "../../componnents/feature";
+import { Feature } from "../../components/feature";
 
 
 export const Search = () => {

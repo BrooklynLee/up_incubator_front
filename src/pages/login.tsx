@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FormError } from "../componnents/form-error";
-import Btn from "../componnents/btn"
+import { FormError } from "../components/form-error";
+import Btn from "../components/btn"
 import { userLogin } from "../redux/usersSlice";
 import { useDispatch } from "react-redux";
 

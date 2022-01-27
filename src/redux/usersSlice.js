@@ -21,8 +21,6 @@ const userSlice = createSlice({
     }
 });
 
-
-
 export const { logIn, logOut } = userSlice.actions;
 
 export const userLogin = (form) => async (dispatch) => {
@@ -78,3 +76,4 @@ export const toggleFav = featureId => async (dispatch, getState) => {
 
 
 export default userSlice.reducer;
+

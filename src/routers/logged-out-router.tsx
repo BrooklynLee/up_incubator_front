@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "../componnents/header";
+import { Header } from "../components/header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Features } from "../pages/client/features";
 import { Feature } from "../pages/client/feature";
