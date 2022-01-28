@@ -3,7 +3,7 @@ import axios from "axios";
 // const callApi = async (method: any, path: any, data: any, jwt: any) => {
 const callApi = async (method: any, path: any, data?: any, jwt?: any) => {
     const headers = {
-        Authorization: jwt,
+        Authorization: `Bearer ${jwt}`,
         contentType: "application/json; charset=utf-8",
     };
     const baseUrl = "/api/v1";
@@ -19,6 +19,9 @@ const callApi = async (method: any, path: any, data?: any, jwt?: any) => {
     }
     else if (method === "post") {
         return axios.post(fullUrl, data, { headers });
+    }
+    else if (method === "put") {
+        return axios.put(fullUrl, data, { headers });
     }
     else {
         return axios.put(fullUrl, data, { headers });

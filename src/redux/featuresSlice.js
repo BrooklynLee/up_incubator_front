@@ -23,11 +23,14 @@ const featuresSlice = createSlice({
                 }
             });
             state.explore.page = payload.page;
+        },
+        setFavs(state, action) {
+            state.favs = action.payload;
         }
     }
 });
 
-const { setExploreFeatures } = featuresSlice.actions;
+const { setExploreFeatures, setFavs } = featuresSlice.actions;
 
 
 export const getFeatures = () => async dispatch => {

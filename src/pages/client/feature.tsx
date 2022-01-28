@@ -88,7 +88,8 @@ export const Feature = () => {
                                                 </div>
                                                 <div className="grid grid-cols-6">
                                                     <div className="px-4 py-2 font-semibold">참고 링크</div>
-                                                    <div className="px-4 py-2 col-span-5">{data.link}</div>
+
+                                                    <div className="px-4 py-2 col-span-5"><a href={data.link} className="text-blue-400 font-semibold">링크</a></div>
                                                 </div>
                                                 <div className="grid grid-cols-6">
                                                     <div className="px-4 py-2 font-semibold">적재 타입</div>
@@ -127,7 +128,7 @@ export const Feature = () => {
 
                                     {/* 스키마 설명 */}
                                     <DataInfo columns={data.columns} />
-                                    <CsvReader />
+                                    <CsvReader key={data.id} />
 
                                     {/* <!-- Experience and education --> */}
                                     <div className="bg-white p-3 shadow-sm rounded-sm">

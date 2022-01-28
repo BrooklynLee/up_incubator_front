@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Dispatch } from 'redux';
 import api from "../api";
+import { setFavs } from "./featuresSlice";
 
 const userSlice = createSlice({
     name: "users",
@@ -23,7 +24,7 @@ const userSlice = createSlice({
 
 export const { logIn, logOut } = userSlice.actions;
 
-export const userLogin = (form) => async (dispatch) => {
+export const userLogin = form => async dispatch => {
     try {
         const {
             data: { id, token }
@@ -52,11 +53,11 @@ export const userLogin = (form) => async (dispatch) => {
 
 export const getFavs = () => async (dispatch, getState) => {
     const {
-        usersReducer: { id }
+        usersReducer: { id, token }
     } = getState();
     try {
-        const { data } = await api.favs(id);
-        // dispatch(setFavs(data));
+        const { data } = await api.favs(id, token);
+        dispatch(setFavs(data));
     } catch (e) {
         console.warn(e);
     }
@@ -67,12 +68,15 @@ export const toggleFav = featureId => async (dispatch, getState) => {
         usersReducer: { id, token }
     } = getState();
     try {
+        // const data = await api.toggleFavs(id, featureId, token);
+        // console.log(data);
         const { status } = await api.toggleFavs(id, featureId, token);
         console.log(status);
     } catch (e) {
         console.warn(e);
     }
 };
+
 
 
 export default userSlice.reducer;

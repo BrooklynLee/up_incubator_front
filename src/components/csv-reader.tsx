@@ -12,7 +12,7 @@ export const CsvReader = () => {
 
   useEffect(() => {
     async function getData() {
-      const response = await fetch("http://localhost:8000/media/tongpi.csv")
+      const response = await fetch("http://localhost:8000/media/testtest.csv")
       const reader = response?.body?.getReader()
       const result = await reader?.read() // raw array
       const decoder = new TextDecoder('utf-8')
@@ -43,28 +43,32 @@ export const CsvReader = () => {
   }, []) // [] means just do this once, after initial render
 
   return (
-    <div>
-      <table className="items-center bg-transparent w-full border-collapse" >
-        <thead>
-          <tr>
-            {columns.map((columnName: any, index: any) => (
-              <th key={index}>{columnName}</th>
-            ))}
-          </tr>
-        </thead>
+    <div className="w-full mb-12 xl:mb-0 px-4 mx-auto mt-8">
+      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+        <div className="block w-full overflow-x-auto">
+          <table className="items-center bg-transparent w-full border-collapse" >
+            <thead>
+              <tr>
+                {columns.map((columnName: any, index: any) => (
+                  <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left" key={index}>{columnName}</th>
+                ))}
+              </tr>
+            </thead>
 
-        <tbody>
-          {data.map((rows: any, index: any) =>
-            <tr>
-              {Object.keys(rows).map((i, index) =>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" key={index}>{rows[i]}</td>
-              )}
-            </tr>
-          )
-          }
-        </tbody>
-      </table>
-    </div >
+            <tbody>
+              {data.map((rows: any, index: any) =>
+                <tr>
+                  {Object.keys(rows).map((i, index) =>
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4" key={index}>{rows[i]}</td>
+                  )}
+                </tr>
+              )
+              }
+            </tbody>
+          </table>
+        </div >
+      </div>
+    </div>
   );
 }
 
