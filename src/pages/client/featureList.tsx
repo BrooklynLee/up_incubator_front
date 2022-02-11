@@ -1,51 +1,34 @@
-import { useNavigate, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Feature } from "../../components/feature";
+import { connect } from "react-redux";
+import { getFeatures, increasePage } from "../../redux/featuresSlice";
+import { FeatureItem } from "../../components/featureItem";
+import { useSelector } from "react-redux";
 import { SearchInput } from "../../components/search-input";
 
-export const Search = () => {
-  const location = useLocation();
-  const history = useNavigate();
+interface IFeatureProp {
+  featureObject: any;
+  getFeaturesWith: any;
+}
 
-  const [features, setFeatures] = useState({ results: [] });
-  const [isLoading, setLoading] = useState(false);
-  const [data, setData] = useState<any>({});
-  const [owner, setOwner] = useState({});
-  const [type, setType] = useState<any>({});
+const FeatureList = ({
+  featureObject,
+  getFeaturesWith,
+}: // page,
+IFeatureProp) => {
+  const fetchData = async () => {
+    getFeaturesWith(featureObject.page);
+    // console.log(featureObject);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const [_, query_chunk] = location.search.split("?");
-      const [query1, query2] = query_chunk.split("=");
-      console.log(query1);
-      console.log(query2);
-
-      if (query1 === "keyword") {
-        const result = await axios.get("/api/v1/features/?search=" + query2);
-        console.log(result.data);
-        setFeatures(result.data);
-        setType(result.data.feature_type);
-        setLoading(false);
-      } else if (query1 === "tag") {
-        const result = await axios.get("/api/v1/features?tag=" + query2);
-        setFeatures(result.data);
-        setType(result.data.feature_type);
-        setLoading(false);
-      } else if (query1 === "feature_type") {
-        const result = await axios.get(
-          "/api/v1/features?feature_type=" + query2
-        );
-        setFeatures(result.data);
-        setType(result.data.feature_type);
-        setLoading(false);
-      }
-    };
     fetchData();
-  }, [history, location]);
+  }, []);
 
-  // console.log(loading, data, called);
+  // const handleSubmit = (e: any) => {
+  //   e.preventDefault();
+  //   fetchData();
+  // };
+
   return (
     <div className="max-w-screen-xl mx-auto mt-8">
       <div className="px-12">
@@ -54,13 +37,12 @@ export const Search = () => {
 
           <ul className="rounded-md shadow-md bg-white absolute left-0 right-0 -bottom-18 mt-3 p-3">
             <li className="text-xs uppercase text-gray-400 border-b border-gray border-solid py-2 px-5 mb-2">
-              Recommended
+              추천
             </li>
-            {features?.results?.map((c: any) => {
+            {featureObject.features.map((c: any) => {
               if (c.is_recommend === true && c.is_active === true) {
                 return (
-                  <Feature
-                    key={c.id}
+                  <FeatureItem
                     id={c.id}
                     name={c.name}
                     desc={c.desc}
@@ -70,19 +52,18 @@ export const Search = () => {
                     tag={c.tag}
                     database_name={c.database_name}
                     table_name={c.table_name}
+                    isFav={c.is_fav}
                   />
                 );
               }
             })}
-
             <li className="text-xs uppercase text-gray-400 border-b border-gray border-solid py-2 px-5 mb-2">
-              Others
+              일반
             </li>
-            {features?.results?.map((c: any) => {
+            {featureObject.features.map((c: any) => {
               if (c.is_recommend === false && c.is_active === true) {
                 return (
-                  <Feature
-                    key={c.id}
+                  <FeatureItem
                     id={c.id}
                     name={c.name}
                     desc={c.desc}
@@ -92,6 +73,7 @@ export const Search = () => {
                     tag={c.tag}
                     database_name={c.database_name}
                     table_name={c.table_name}
+                    isFav={c.is_fav}
                   />
                 );
               }
@@ -102,3 +84,16 @@ export const Search = () => {
     </div>
   );
 };
+
+function mapStateToProps(state: any) {
+  return { featureObject: state.featuresReducer.explore };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    getFeaturesWith: (page: any) => dispatch(getFeatures(page)),
+    increasePageWith: () => dispatch(increasePage(1)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeatureList);

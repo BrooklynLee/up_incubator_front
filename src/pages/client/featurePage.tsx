@@ -1,50 +1,51 @@
 import React, { useEffect, useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useParams } from "react-router";
+import { connect } from "react-redux";
+import axios from "axios";
+import { fetchFeature, getFeature } from "../../redux/featureSlice";
+import { Fav } from "../../components/fav";
 import { SwaggerViewer } from "../../components/swagger";
 import { DataInfo } from "../../components/data-info";
 import { CsvReader } from "../../components/csv-reader";
-import { useDispatch } from "react-redux";
-import { Fav } from "../../components/fav";
+import { ResponsiveBullet } from "@nivo/bullet";
 import { Haappy } from "../../components/myResponsiveBullet";
-import { Content } from "../../components/content";
 
-export const Feature = () => {
-  // const params = useParams<IFeatureParams>();
+interface IFeatureProp {
+  feature: any;
+  getFeatureWith: any;
+}
 
+const FeaturePage = ({ feature, getFeatureWith }: IFeatureProp) => {
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState<any>({});
-  const [owner, setOwner] = useState({});
   const [type, setType] = useState<any>({});
-
   const { id } = useParams();
-  const dispatch = useDispatch();
-  // const [progress, setProgress] = useState(0);
+
+  const fetchData = async () => {
+    setLoading(true);
+    const result = await axios.get("/api/v1/features/" + id);
+    setType(result.data.feature_type);
+    getFeatureWith(id);
+    setData(feature.feature);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const result = await axios.get("/api/v1/features/" + id);
-      setData(result.data);
-      setType(result.data.feature_type);
-      setLoading(false);
-      console.log(result.data);
-    };
     fetchData();
   }, []);
 
   return (
-    <div className="post-view-wrapper bg-gray-100 bg-auto">
+    <div className="post-view-wrapper bg-gray-100">
       {isLoading ? (
         <div>불러오는 중 ...</div>
       ) : (
         <>
-          <div className="max-w-screen-xl mx-auto mt-8">
-            <div className="px-12 ">
-              <div className="w-full mx-2 py-4">
+          <div className="max-w-screen-xl mx-auto mt-8 ">
+            <div className="px-12">
+              <div className="w-full mx-2 h-64">
                 {/* <!-- Upper Side --> */}
-                <Fav key={data.id} id={data.id} is_fav={data.is_fav} />
+                <Fav id={data.id} is_fav={data.is_fav} />
+
                 {/* <!-- Feature Info Section --> */}
                 <div className="bg-white p-3 shadow-sm rounded-sm">
                   <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -147,48 +148,31 @@ export const Feature = () => {
                   </div>
                 </div>
                 {/* <!-- End of Feature Info section --> */}
+
                 <div className="my-4"></div>
+
                 {/* <!-- Feature Info Section --> */}
                 <div className="bg-white p-3 shadow-sm rounded-sm">
                   <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                     <span className="tracking-wide">2. 데이터 정보</span>
                   </div>
-                  {/* <!-- End of Feature Info section --> */}
-                  {type.type_name === "Rest API" ? (
-                    <div>
-                      <SwaggerViewer url={data.file} />{" "}
-                    </div>
-                  ) : type.type_name === "Contents" ? (
-                    <div>
-                      <Content />
-                    </div>
-                  ) : (
-                    <div>
-                      {/* 스키마 설명 */}
-                      <DataInfo columns={data.columns} />
-                      <div className="bg-white p-3 shadow-sm rounded-sm">
-                        <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                          <span className="tracking-wide">3. 샘플 데이터</span>
-                        </div>
-                        <CsvReader key={data.id} />
-                      </div>
-                      <div className="bg-white p-3 shadow-sm rounded-sm">
-                        <div className="bg-white p-3 shadow-sm rounded-sm">
-                          <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                            <span className="tracking-wide">
-                              4. 데이터 분포
-                            </span>
-                          </div>
-                          <Haappy />
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
+                {/* <!-- End of Feature Info section --> */}
 
+                {type.type_name === "Rest API" ? (
+                  <div>
+                    <SwaggerViewer url={data.file} />{" "}
+                  </div>
+                ) : null}
+
+                {/* 스키마 설명 */}
+                <DataInfo columns={data.columns} />
+                <CsvReader key={data.id} />
+
+                <div>
+                  <Haappy />
+                </div>
                 {/* <!-- Experience and education --> */}
-                <div className="my-4"></div>
-
                 <div className="bg-white p-3 shadow-sm rounded-sm">
                   <div className="grid grid-cols-2">
                     <div>
@@ -296,3 +280,16 @@ export const Feature = () => {
     </div>
   );
 };
+
+function mapStateToProps(state: any) {
+  return { feature: state.featureReducer.feature };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    getFeatureWith: (id: number) => dispatch(fetchFeature(id)),
+    // increasePageWith: () => dispatch(increasePage(1)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeaturePage);
