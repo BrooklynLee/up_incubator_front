@@ -15,14 +15,11 @@ export const Features = () => {
   const [features, setFeatures] = useState({ results: [] });
   const [tags, setTags] = useState({ results: [] });
   // const [progress, setProgress] = useState(0);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [keywords, setKeywords] = useState("");
   const [tagQuery, setTagQuery] = useState([]);
 
   const fetchData = async () => {
-    setLoading(true);
-    // const result = await axios.get("/api/v1/features")
-    // console.log("/api/v1/features" + "/?search=" + keywords)
     const result = await axios.get("/api/v1/features" + "/?search=" + keywords);
     // const tag_result = await axios.get("/api/v1/tags/")
     setFeatures(result.data);

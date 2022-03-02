@@ -3,7 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 // import colors from "../../colors";
 
-
 // const Button = styled.button`
 //   margin-bottom: 25px;
 //   border-radius: 30px;
@@ -16,25 +15,19 @@ import PropTypes from "prop-types";
 //   font-size: 14px;
 // `;
 
-
 interface IProps {
-    loading?: any;
-    onClick: any;
-    text: any;
-    // any other props that come into the component
+  loading?: any;
+  onClick: any;
+  text: any;
+  // any other props that come into the component
 }
 
-
 const Btn = ({ loading = false, onClick, text }: IProps) => (
-    <button onClick={loading ? null : onClick}>
-        {/* <Button> */}
-        {loading ? (
-            <p>???????????????????????</p>
-        ) : (
-            <p>{text}</p>
-        )}
-        {/* </Button> */}
-    </button >
+  <button onClick={loading ? null : onClick}>
+    {/* <Button> */}
+    {loading ? <p>???????????????????????</p> : <p>{text}</p>}
+    {/* </Button> */}
+  </button>
 );
 
 // Btn.propTypes = {

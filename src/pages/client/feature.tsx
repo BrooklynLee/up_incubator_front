@@ -9,6 +9,11 @@ import { useDispatch } from "react-redux";
 import { Fav } from "../../components/fav";
 import { Haappy } from "../../components/myResponsiveBullet";
 import { Content } from "../../components/content";
+import { PathMatch, Route, Routes, useMatch } from "react-router-dom";
+import Price from "../../components/price";
+import Chart from "../../components/chart";
+import TabComponents from "../../components/tab";
+import { Navigate } from "react-router-dom";
 
 export const Feature = () => {
   // const params = useParams<IFeatureParams>();
@@ -17,7 +22,11 @@ export const Feature = () => {
   const [data, setData] = useState<any>({});
   const [owner, setOwner] = useState({});
   const [type, setType] = useState<any>({});
-
+  // const priceMatch = useMatch("/:id/price");
+  // const priceMatch = useMatch("/:id/price");
+  const priceMatch: PathMatch<"id"> | null = useMatch("features/:id/price");
+  const chartMatch: PathMatch<"id"> | null = useMatch("features/:id/chart");
+  // const chartMatch = useMatch("/:id/chart");
   const { id } = useParams();
   const dispatch = useDispatch();
   // const [progress, setProgress] = useState(0);
@@ -29,10 +38,11 @@ export const Feature = () => {
       setData(result.data);
       setType(result.data.feature_type);
       setLoading(false);
-      console.log(result.data);
+      console.log(priceMatch);
+      console.log(chartMatch);
     };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div className="post-view-wrapper bg-gray-100 bg-auto">
@@ -286,6 +296,40 @@ export const Feature = () => {
                   </div>
                   {/* <!-- End of Experience and education grid --> */}
                 </div>
+
+                <div className="my-4"></div>
+
+                {/* 신규 작업 중  */}
+                <div className="bg-white p-3 shadow-sm rounded-sm">
+                  <div className="grid grid-cols-2">
+                    <div>
+                      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                        {/* <span className="tracking-wide">테스트 중</span> */}
+                        <ul className="flex flex-wrap border-b border-gray-200 dark:border-gray-700">
+                          <TabComponents
+                            isActive={priceMatch !== null}
+                            text="Stat"
+                            link={`price`}
+                          />
+                          <TabComponents
+                            isActive={chartMatch !== null}
+                            text="Distribution"
+                            link={`chart`}
+                          />
+                        </ul>
+                        {/* <Price /> */}
+                      </div>
+                      <div className="my-4"></div>
+                      <Routes>
+                        <Route path="price" element={<Price />} />
+                        <Route path="chart" element={<Chart />} />
+                      </Routes>
+                      {/* <ul className="list-inside space-y-2">rrr</ul> */}
+                    </div>
+                  </div>
+                  {/* <!-- End of Experience and education grid --> */}
+                </div>
+
                 {/* <!-- End of profile tab --> */}
               </div>
             </div>

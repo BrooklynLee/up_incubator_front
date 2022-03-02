@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getFeatures, increasePage } from "../../redux/featuresSlice";
 import { FeatureItem } from "../../components/featureItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { SearchInput } from "../../components/search-input";
 
-interface IFeatureProp {
-  featureObject: any;
-  getFeaturesWith: any;
+interface RootState {
+  featuresReducer: any;
 }
 
-const FeatureList = ({
-  featureObject,
-  getFeaturesWith,
-}: // page,
-IFeatureProp) => {
+const FeatureList2 = () => {
+  const featureObject = useSelector(
+    (state: RootState) => state.featuresReducer.explore
+  );
+
+  const dispatch = useDispatch();
+  const getFeaturesWith = (page: any) => dispatch(getFeatures(page));
+  // const increasePageWith = () => dispatch(increasePage(1));
+
   const fetchData = async () => {
     getFeaturesWith(featureObject.page);
     // console.log(featureObject);
@@ -38,6 +42,7 @@ IFeatureProp) => {
               if (c.is_recommend === true && c.is_active === true) {
                 return (
                   <FeatureItem
+                    key={c.id}
                     id={c.id}
                     name={c.name}
                     desc={c.desc}
@@ -55,24 +60,6 @@ IFeatureProp) => {
             <li className="text-xs uppercase text-gray-400 border-b border-gray border-solid py-2 px-5 mb-2">
               일반
             </li>
-            {featureObject.features.map((c: any) => {
-              if (c.is_recommend === false && c.is_active === true) {
-                return (
-                  <FeatureItem
-                    id={c.id}
-                    name={c.name}
-                    desc={c.desc}
-                    feature_type={c.feature_type}
-                    key_type={c.key_type}
-                    status_type={c.status_type}
-                    tag={c.tag}
-                    database_name={c.database_name}
-                    table_name={c.table_name}
-                    isFav={c.is_fav}
-                  />
-                );
-              }
-            })}
           </ul>
         </div>
       </div>
@@ -80,15 +67,16 @@ IFeatureProp) => {
   );
 };
 
-function mapStateToProps(state: any) {
-  return { featureObject: state.featuresReducer.explore };
-}
+// function mapStateToProps(state: any) {
+//   // return { featureObject: state.featuresReducer.explore };
+// }
 
-function mapDispatchToProps(dispatch: any) {
-  return {
-    getFeaturesWith: (page: any) => dispatch(getFeatures(page)),
-    increasePageWith: () => dispatch(increasePage(1)),
-  };
-}
+// function mapDispatchToProps(dispatch: any) {
+//   return {
+//     getFeaturesWith: (page: any) => dispatch(getFeatures(page)),
+//     increasePageWith: () => dispatch(increasePage(1)),
+//   };
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FeatureList);
+// export default connect(mapStateToProps, mapDispatchToProps)(FeatureList2);
+export default FeatureList2;

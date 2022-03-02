@@ -40,7 +40,7 @@ export const Feature: React.FC<IFeatureProps> = ({
     <li className="grid grid-cols-10 gap-4 justify-center items-center cursor-pointer px-4 py-2 rounded-lg hover:bg-gray-50">
       <div className="col-span-1 flex justify-center items-center">{id}</div>
       <div className="col-start-2 col-span-6 pl-8 border-l-2 border-solid border-gray">
-        <Link to={`/features/${id}`}>
+        <Link to={`/features/${id}/price`}>
           <div>
             <h3 className="text-gray-900 font-medium text-md">{name}</h3>
             <p className="text-gray-600 mt-1 font-regular text-sm">{desc}</p>

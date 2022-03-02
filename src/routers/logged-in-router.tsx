@@ -12,18 +12,21 @@ import FollowingList from "../pages/client/followingList";
 // import FeaturePage from "../pages/client/featurePage";
 import { Haappy } from "../components/myResponsiveBullet";
 import FeatureSearchList from "../pages/client/featureSearchList";
+import FeatureList2 from "../pages/client/featureList copy";
+import Price from "../components/price";
 // import { ExploreContainer } from "../pages/client/ExploreContainer";
 
 const ClientRoutes = [
-  // <Route key={1} path="/" element={<Features />} />,
-  <Route key={2} path="/features/:id" element={<Feature />} />,
+  <Route key={1} path="/" element={<Features />} />,
+  <Route key={2} path="/features/:id/*" element={<Feature />} />,
   <Route key={3} path="/search" element={<Search />} />,
-  // <Route key={4} path="/test" element={<CsvReader />} />,
+  <Route key={4} path="/test" element={<FeatureList2 />} />,
   <Route key={5} path="/login" element={<Login />} />,
   // <Route key={6} path="/" element={<Features />} />,
   <Route key={7} path="/my" element={<FollowingList />} />,
   <Route key={8} path="/chart" element={<Haappy />} />,
-  <Route key={9} path="/" element={<FeatureList />} />,
+  // <Route key={9} path="price" element={<Price />} />,
+  // <Route key={9} path="/" element={<FeatureList />} />,
   <Route key={10} path="/test-search" element={<FeatureSearchList />} />,
 ];
 
